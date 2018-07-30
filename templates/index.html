@@ -1,0 +1,139 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title> {{ title }} </title>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta content="" name="keywords">
+  <meta content="" name="description">
+
+    {% load static %}
+    {% load bootstrap4 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript jquery='full' %}
+    {% load custom_filter %}
+  <!-- Favicons -->
+  <link href="{% static "img/favicon.png" %}" rel="icon">
+  <link  href="{% static "img/apple-touch-icon.png" %}" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
+
+
+  <!-- Libraries CSS Files -->
+    <link href="{% static "lib/font-awesome/css/font-awesome.min.css" %}"rel="stylesheet">
+    <link href="https://cdn.rawgit.com/bantikyan/icheck-bootstrap/master/icheck-bootstrap.min.css" rel="stylesheet" type="text/css" />
+
+    <!-- Main Stylesheet File -->
+  <link href="{% static "css/style.css" %}"rel="stylesheet">
+
+
+  <!-- =======================================================
+    Theme Name: BizPage
+    Theme URL: https://bootstrapmade.com/bizpage-bootstrap-business-template/
+    Author: BootstrapMade.com
+    License: https://bootstrapmade.com/license/
+  ======================================================= -->
+</head>
+
+<body>
+
+  <!--==========================
+    Header
+  ============================-->
+  <header id="header">
+    <div class="container-fluid">
+
+      <div id="logo" class="pull-left">
+        <h1><a href="/" class="scrollto">Volkswagen Vin decoder</a></h1>
+        <!-- Uncomment below if you prefer to use an image logo -->
+        <!-- <a href="#intro"><img src="img/logo.png" alt="" title="" /></a>-->
+      </div>
+
+    </div>
+  </header><!-- #header -->
+
+  <!--==========================
+    Intro Section
+  ============================-->
+  <section id="intro">
+    <div class="intro-container">
+      <div id="introCarousel" class="carousel  slide carousel-fade" data-ride="carousel">
+
+         
+
+        <div class="carousel-inner" role="listbox">
+
+          <div class="carousel-item active">
+            <div class="carousel-background"><img src="{% static "img/car.jpeg" %}" alt=""></div>
+
+            <div class="carousel-container">
+              <div class="carousel-content">
+                <h2> Volkswagen VIN Decoder </h2>
+
+                <form  action="/" method="post" class="form"  role="form" >
+
+                  <div class="form-group">
+                    {% csrf_token %}
+                    {% bootstrap_form form show_label=False %}
+
+
+                    <div class="validation"></div>
+
+                  </div>
+
+                    <div class="text-center"><button type="submit" id="send-button" class="btn btn-get-started scrollto">Look up</button></div>
+                </form>
+
+              {% if show_res %}
+
+              <div class="resultat">
+                  <h3 class="title">  Variantes prédites  </h3>
+
+                    {% for i in res %}
+                        {% if  i.prob != 0 %}
+                          <div class="res-row">
+                              <span id="variante-id">
+                                  {{ i.variante.marque }} {{ i.variante.modelegen|replaceModel }} {{ i.variante.cylindreelit }} L {{ i.variante.puissancecom }}cv
+                              </span> : <span id="variante-prob"> {{  i.prob|multiply }} % </span>
+                          </div>
+                        {% endif %}
+                    {% endfor %}
+
+              </div>
+
+              {% endif %}
+
+
+              </div>
+            </div>
+
+
+          </div>
+
+
+        </div>
+
+
+
+      </div>
+    </div>
+  </section><!-- #intro -->
+
+
+  <!-- JavaScript Libraries -->
+
+ 
+  <script src="{% static "lib/superfish/hoverIntent.js" %}"></script>
+  <script src="{% static "lib/superfish/superfish.min.js" %}"></script>
+
+  <script src="{% static "lib/wow/wow.min.js" %}"></script>
+
+
+
+  <!-- Template Main Javascript File -->
+  <script src="{% static "js/main.js" %}"></script>
+
+</body>
+</html>
