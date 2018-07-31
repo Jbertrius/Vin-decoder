@@ -35,6 +35,7 @@ class Variante_pred(models.Model):
     prob = models.FloatField(null=True)
     vin = models.ForeignKey(Vin, on_delete=models.CASCADE)
     trusted = models.BooleanField(default=True)
+    version = models.CharField(max_length=5, null=True)
 
     def __str__(self):
         return " {} {} ".format(self.variante_id, self.prob)

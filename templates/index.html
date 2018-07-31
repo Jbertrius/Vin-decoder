@@ -92,7 +92,7 @@
                   <h3 class="title">  Variantes prédites  </h3>
 
                     {% for i in res %}
-                        {% if  i.prob != 0 %}
+                        {% if  i.prob != 0 and i.trusted %}
                           <div class="res-row">
                               <span id="variante-id">
                                   {{ i.variante.marque }} {{ i.variante.modelegen|replaceModel }} {{ i.variante.cylindreelit }} L {{ i.variante.puissancecom }}cv
